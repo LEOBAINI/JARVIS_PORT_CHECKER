@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 
 
 
-public class main {
+public class PortCheckerStart {
 	////
 	
 	
