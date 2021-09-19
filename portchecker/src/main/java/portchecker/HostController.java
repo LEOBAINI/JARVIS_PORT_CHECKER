@@ -11,6 +11,8 @@ public class HostController {
 	
 	public static ArrayList<Host> hosts=new ArrayList<Host>();
 	
+	public static int nodosVivos=0;
+	
 	public static void getResumedInfo() {
 		int ok=0;
 		int fail=0;
@@ -26,6 +28,11 @@ public class HostController {
 		System.out.println("Total equipos -> "+hosts.size()+"| En falla -> "+fail+"| ok -> "+ok);
 	}
 	
-
+public static void destruirHostMemoria(Host host) {
+	nodosVivos--;
+	host=null;
+	System.gc();
+	
+}
 
 }

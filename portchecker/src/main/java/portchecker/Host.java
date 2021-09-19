@@ -9,8 +9,8 @@ public class Host {
 	int port;
 	boolean isOpen;
 	int pruebasExitosas=0;
-	int pruebasExitosasSuficientes=3;
-	int maximoNroIntentos=20;
+	int pruebasExitosasSuficientes=1;
+	int maximoNroIntentos=1;
 	
 	
 	
@@ -18,6 +18,7 @@ public class Host {
 	
 	public Host(final String ip, final int port) {
 		super();
+		
 		this.ip = ip;
 		this.port = port;
 		final Timer timer;
@@ -38,14 +39,20 @@ public class Host {
 	        		maximoNroIntentos--;
 	        	}
 	        	if(pruebasExitosas>=pruebasExitosasSuficientes) {
-	        		new FileUtils().escribirArchivo("C:\\Desarrollos\\hostsOK.log", getIp()+"|"+getPort()+"|"+ isOpen()+" pruebas ok:"+pruebasExitosas+"| intentos restantes permitidos:"+maximoNroIntentos);
+	        		new FileUtils().escribirArchivo("C:\\Users\\AR00122207\\Desktop\\Jarvis\\hostsOK.log", getIp()+"|"+getPort()+"|"+ isOpen()+" pruebas ok:"+pruebasExitosas+"| intentos restantes permitidos:"+maximoNroIntentos);
 	        		
 	        		timer.cancel();
+	        		autodestry();
 	        	}if(maximoNroIntentos==0) {
-	        		new FileUtils().escribirArchivo("C:\\Desarrollos\\hostsError.log", getIp()+"|"+getPort()+"|"+ isOpen()+" pruebas ok:"+pruebasExitosas+"| intentos restantes permitidos:"+maximoNroIntentos);
+	        		new FileUtils().escribirArchivo("C:\\Users\\AR00122207\\Desktop\\Jarvis\\hostsError.log", getIp()+"|"+getPort()+"|"+ isOpen()+" pruebas ok:"+pruebasExitosas+"| intentos restantes permitidos:"+maximoNroIntentos);
+	        		
 	        		timer.cancel();
+	        		autodestry();
+	        		
+	        		
 	        	}
 	        	System.out.println(getIp()+"|"+getPort()+"|"+ isOpen()+" pruebas ok:"+pruebasExitosas+"| intentos restantes permitidos:"+maximoNroIntentos);
+	       
 	        }
 	        };
 	        // Empezamos dentro de 10ms y luego lanzamos la tarea cada 1000ms
@@ -58,7 +65,9 @@ public class Host {
 
 
 	
-
+	private void autodestry() {
+		HostController.destruirHostMemoria(this);
+	}
 
 	public static boolean serverListening(String host, int port)
 	{

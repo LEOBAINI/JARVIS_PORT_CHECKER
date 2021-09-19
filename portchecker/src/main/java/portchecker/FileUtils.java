@@ -18,8 +18,8 @@ public class FileUtils {
 		// TODO Auto-generated constructor stub
 	}
 
-	public  String LeeArchivoParametrosYCrearHosts(String archivo)  {
-	  	 
+	public  String LeeArchivoParametrosYCrearHosts(String archivo) throws InterruptedException  {
+	  	 int objetosCreados=0;
 		System.out.println("Intentando leer archivo "+archivo);
 	  	  String resultado=null;    
 	  	  String strLinea=null;
@@ -41,13 +41,26 @@ public class FileUtils {
 				  
 				   
 				      System.out.println(strLinea);
+				      
 				      if(!strLinea.contains("NULL") && getPortFromLine(strLinea)!=-1) {
-				    	  new Host(getIpFromLine(strLinea),getPortFromLine(strLinea));
+				    	 new Host(getIpFromLine(strLinea),getPortFromLine(strLinea));
+				    	 HostController.nodosVivos++;
+				    	 
 				      }
+				      
+				     if(HostController.nodosVivos>=1000) {
+				    	  while(HostController.nodosVivos<=500) {
+				    		  System.out.println("Nodos Vivos:"+HostController.nodosVivos);
+				    		  Thread.sleep(1000);
+				    	  }
+				      }
+				      
+				     
+				      
 				      
 					 
 				  }
-				 System.out.println(archivo+" leído correctamente.");
+				 System.out.println(archivo+" leído correctamente. Objetos creados a monitorear -> "+objetosCreados);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 			//	e.printStackTrace();
@@ -94,7 +107,7 @@ public void escribirArchivo(String archivo,String dataLog) {
         bw = new BufferedWriter(fw);
         bw.write(data);
         bw.newLine();
-        System.out.println("información agregada!");
+        System.out.println("información agregada! -> "+dataLog);
     } catch (IOException e) {
         e.printStackTrace();
     } finally {
