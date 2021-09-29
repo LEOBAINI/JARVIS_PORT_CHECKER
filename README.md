@@ -14,3 +14,19 @@ It should be noted that it has no host limit to create, it has been tested with 
 it does not allow the creation of more than 1000 virtual hosts at the same time, and as each virtual host writes to the log files, they end their life cycle
 leading to the creation of new virtual hosts.
 
+The idea is similar to the current image, in wich each neuron, represents to each virtual host.
+
+![image](https://user-images.githubusercontent.com/11530132/135297438-a7320232-0060-4654-a6a0-63283ccc571d.png)
+
+Here is working and writting logs online.
+
+![image](https://user-images.githubusercontent.com/11530132/135297705-6a65d396-3ea0-455d-a267-064f5c00ad33.png)
+
+Here si the input, host+port
+
+![image](https://user-images.githubusercontent.com/11530132/135297817-9d86b19d-dc6a-42d2-b0b3-c6c9276e6d66.png)
+
+
+
+
+
